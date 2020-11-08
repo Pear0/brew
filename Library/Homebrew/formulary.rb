@@ -218,14 +218,14 @@ module Formulary
     end
 
     def load_file(flags:)
-      if %r{githubusercontent.com/[\w-]+/[\w-]+/[a-f0-9]{40}(?:/Formula)?/(?<formula_name>[\w+-.@]+).rb} =~ url # rubocop:disable Style/CaseLikeIf
-        odisabled "Installation of #{formula_name} from a GitHub commit URL",
-                  "'brew extract #{formula_name}' to stable tap on GitHub"
-      elsif url.match?(%r{^(https?|ftp)://})
-        odisabled "Non-checksummed download of #{name} formula file from an arbitrary URL",
-                  "'brew extract' or 'brew create' and 'brew tap-new' to create a "\
-                  "formula file in a tap on GitHub"
-      end
+      # if %r{githubusercontent.com/[\w-]+/[\w-]+/[a-f0-9]{40}(?:/Formula)?/(?<formula_name>[\w+-.@]+).rb} =~ url # rubocop:disable Style/CaseLikeIf
+      #   odisabled "Installation of #{formula_name} from a GitHub commit URL",
+      #             "'brew extract #{formula_name}' to stable tap on GitHub"
+      # elsif url.match?(%r{^(https?|ftp)://})
+      #   odisabled "Non-checksummed download of #{name} formula file from an arbitrary URL",
+      #             "'brew extract' or 'brew create' and 'brew tap-new' to create a "\
+      #             "formula file in a tap on GitHub"
+      # end
       HOMEBREW_CACHE_FORMULA.mkpath
       FileUtils.rm_f(path)
       curl_download url, to: path
